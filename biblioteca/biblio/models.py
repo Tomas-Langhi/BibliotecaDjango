@@ -3,26 +3,32 @@ from django.db import models
 # Create your models here.
 
 class Autor(models.Model):
-    nombre = models.CharField(max_length=50);
-    codigo = models.IntegerField(primary_key=True);
+    nombre = models.CharField(max_length=50, default="");
+    apellido = models.CharField(max_length=50, default="");
+    def __str__(self):
+        return str(self.nombre + " " + self.apellido)
 
 
 class Libro(models.Model):
-    titulo = models.CharField(max_length=50);
-    editorial = models.CharField(max_length=50);
+    titulo = models.CharField(max_length=50, default="");
+    editorial = models.CharField(max_length=50, default="");
     paginas =  models.IntegerField();
-    codigo = models.IntegerField(primary_key=True);
     autor = models.ForeignKey('Autor', on_delete=models.CASCADE);
+    def __str__(self):
+        return str(self.titulo)
     
 class Ejemplar(models.Model):
-    localizacion = models.CharField(max_length=50);
-    codigo = models.IntegerField(primary_key=True);
+    localizacion = models.CharField(max_length=50, default="");
     libro = models.ForeignKey('Libro', on_delete=models.CASCADE);
+    def __str__(self):
+        return str(self.libro)
 
 class Usuario(models.Model):
-    nombre = models.CharField(max_length=50);
-    direccion = models.CharField(max_length=100);
-    telefono = models.CharField(max_length=20);
-    codigo = models.IntegerField(primary_key=True);
+    nombre = models.CharField(max_length=50, default="");
+    apellido = models.CharField(max_length=50, default="");
+    direccion = models.CharField(max_length=100, default="");
+    telefono = models.CharField(max_length=20, default="");
     ejemplar = models.ManyToManyField('Ejemplar');
+    def __str__(self):
+        return str(self.nombre + " " + self.apellido)
 
