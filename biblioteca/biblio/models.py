@@ -8,10 +8,11 @@ class Autor(models.Model):
     edad =  models.IntegerField();
     def __str__(self):
         return str(self.nombre + " " + self.apellido)
-    
-    def get_age(self):
-        return edad
 
+    def get_age(self):
+        edad = self.edad
+        return edad
+    
 
 class Libro(models.Model):
     titulo = models.CharField(max_length=50, default="");
@@ -39,5 +40,6 @@ class Usuario(models.Model):
         return str(self.nombre + " " + self.apellido)
     
     def get_age(self):
+        edad = self.edad
         return edad
 

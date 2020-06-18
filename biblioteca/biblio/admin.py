@@ -5,21 +5,26 @@ class UsuarioAdmin(admin.ModelAdmin):
 
     #Para excluir atributos
     #exclude = ['telefono']
+
+    #Para previsualizar datos
+    list_display = ['nombre', 'apellido','telefono', 'get_age',]
     
     #Para armar pestañas separando los datos
     fieldsets = (
         ('Informacion Personal',{
-            'fields': ('nombre','apellido','edad', 'direccion', 'telefono')
+            'fields': ('nombre','apellido','edad')
+        }),
+        ('Contacto',{
+            'fields': ('direccion', 'telefono')
         }),
         ('Detalle de alquileres',{
             'fields': ('ejemplar',)
         }),
     )
-
+"""
     #Para diferenciar entre adultos y menores
-    """
     def mayor(self):
-        if edad > 18:
+        if self.edad > 18:
             return True
         else:
             False
@@ -34,16 +39,23 @@ class UsuarioAdmin(admin.ModelAdmin):
             return "<b style = color: red;'>Desaprobado</b>"
     #color.allow_tag = True
 """
-    #Para previsualizar datos
-    list_display = ['nombre', 'apellido','telefono']
+
+
 
 class AutorAdmin(admin.ModelAdmin):
-    list_display = ('get_age', 'title')
-    list_display_links = ('title',)
-    filter_vertical = True
+    #Para previsualizar datos
+    list_display = ['nombre', 'apellido', 'get_age',]
+
+class LibroAdmin(admin.ModelAdmin):
+    #Para previsualizar datos
+    list_display = ['titulo', 'editorial']
+
+class EjemplarAdmin(admin.ModelAdmin):
+    #Para previsualizar datos
+    list_display = ['libro', 'localizacion']
 
 # Register your models here.
-admin.site.register(Autor,);
-admin.site.register(Libro,);
+admin.site.register(Autor, AutorAdmin,);
+admin.site.register(Libro, LibroAdmin),;
 admin.site.register(Usuario, UsuarioAdmin,);
-admin.site.register(Ejemplar,);
+admin.site.register(Ejemplar, EjemplarAdmin,);
