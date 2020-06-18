@@ -5,8 +5,12 @@ from django.db import models
 class Autor(models.Model):
     nombre = models.CharField(max_length=50, default="");
     apellido = models.CharField(max_length=50, default="");
+    edad =  models.IntegerField();
     def __str__(self):
         return str(self.nombre + " " + self.apellido)
+    
+    def get_age(self):
+        return edad
 
 
 class Libro(models.Model):
@@ -26,9 +30,14 @@ class Ejemplar(models.Model):
 class Usuario(models.Model):
     nombre = models.CharField(max_length=50, default="");
     apellido = models.CharField(max_length=50, default="");
+    edad =  models.IntegerField();
     direccion = models.CharField(max_length=100, default="");
     telefono = models.CharField(max_length=20, default="");
     ejemplar = models.ManyToManyField('Ejemplar');
+    
     def __str__(self):
         return str(self.nombre + " " + self.apellido)
+    
+    def get_age(self):
+        return edad
 
