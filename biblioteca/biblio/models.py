@@ -12,6 +12,15 @@ class Autor(models.Model):
     def get_age(self):
         edad = self.edad
         return edad
+        
+    #Para diferenciar entre adultos y menores
+    def mayor(self):
+        if self.edad > 18:
+            return True
+        else:
+            False
+    mayor.boolean = True
+    mayor.short_description = 'Es adulto'
     
 
 class Libro(models.Model):
@@ -25,6 +34,8 @@ class Libro(models.Model):
 class Ejemplar(models.Model):
     localizacion = models.CharField(max_length=50, default="");
     libro = models.ForeignKey('Libro', on_delete=models.CASCADE);
+    #Esto es para que funcione el filter_horizontal
+    #libro = models.ManyToManyField('Libro',);
     def __str__(self):
         return str(self.libro)
 
@@ -42,4 +53,16 @@ class Usuario(models.Model):
     def get_age(self):
         edad = self.edad
         return edad
+    
+    #Para diferenciar entre adultos y menores
+    def mayor(self):
+        if self.edad > 18:
+            return True
+        else:
+            False
+    mayor.boolean = True
+    mayor.short_description = 'Es adulto'
+
+
+
 
