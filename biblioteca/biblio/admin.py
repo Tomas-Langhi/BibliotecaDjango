@@ -27,6 +27,7 @@ class LibroInline(admin.TabularInline):
 class AutorAdmin(admin.ModelAdmin):
     #Para previsualizar datos
     list_display = ['nombre', 'apellido', 'get_age', 'mayor',]
+    search_fields = ['nombre', 'apellido',]
 
     #Para poder editar los datos del libro desde el autor
     inlines = [ LibroInline,]
